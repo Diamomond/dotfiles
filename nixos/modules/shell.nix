@@ -20,10 +20,11 @@
       ll = "ls -l";
       cam = "ffplay -f video4linux2 -i /dev/video0 -vf 'hflip' ";
       edit = "sudo -e";
-      rebuild = "sudo nixos-rebuild switch --flake /etc/nixos/";
+      rebuild = "sudo nixos-rebuild boot --flake /etc/nixos/";
       fu = "sudo nix flake update --flake /etc/nixos/";
       fetch = "fastfetch";
-      fur = "sudo nix flake update --flake /etc/nixos/ && sudo nixos-rebuild switch --flake /etc/nixos/";
+      fur = "sudo nix flake update --flake /etc/nixos/ && sudo nixos-rebuild boot --flake /etc/nixos/";
+      music="mpv --vo=null --video=no --no-video --term-osd-bar --no-resume-playback --loop-playlist=inf --shuffle *";
     };
 
     histSize = 10000;
