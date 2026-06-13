@@ -7,9 +7,14 @@
     XCURSOR_THEME = "BreezeX-RosePine-Linux";
   };
 
-  environment.sessionVariables={
-#GSETTINGS_SCHEMA_DIR = "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas";
+ environment.variables = rec {
+    GSETTINGS_SCHEMA_DIR="${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}/glib-2.0/schemas";
+  }; 
 
+  environment.sessionVariables={
+  XDG_CURRENT_DESKTOP = "niri";
+  XDG_SESSION_TYPE = "wayland";
+  NIXOS_OZONE_WL = "1";
 QT_QPA_PLATFORMTHEME = "gtk3";
   };
 
