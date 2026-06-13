@@ -6,8 +6,8 @@ services.samba = {
     #package = pkgs.samba4Full;
     usershares.enable = true;
     enable = true;
-    enableNmbd = true;
-    enableWinbindd = false;
+    nmbd.enable = true;
+    winbindd.enable = false;
     openFirewall = true;
     settings = {
       global = {
@@ -34,6 +34,25 @@ services.samba = {
 
       "Music" = {
         "path" = "/home/lukas/Music";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "no";
+        "valid users" = "lukas";
+        "force user" = "lukas";
+      };
+
+
+      "Documents" = {
+        "path" = "/home/lukas/Documents/";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "no";
+        "valid users" = "lukas";
+        "force user" = "lukas";
+      };
+
+      "Pictures" = {
+        "path" = "/home/lukas/Pictures";
         "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "no";
