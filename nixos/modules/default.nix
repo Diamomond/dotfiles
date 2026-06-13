@@ -16,10 +16,11 @@
       ./programs.nix
       ./services.nix
       ./shell.nix
-      ./syncthing.nix
       ./users.nix
       ./fonts.nix
       ./cachyos.nix
       ./samba.nix
+      ./searx.nix
+      ./anki.nix
     ];
 }
