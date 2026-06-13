@@ -132,6 +132,7 @@ layout {
     }
 }
 
+spawn-at-startup "dbus-update-activation-environment" "--systemd" "--all"
 spawn-at-startup "noctalia-shell"
 spawn-at-startup "polkit"
 spawn-at-startup "mako"
@@ -155,6 +156,22 @@ window-rule {
     default-column-width {}
 }
 
+window-rule {
+    match app-id=r#"^net\.yoyogames\.deltarune$"# // or find app-id via `niri msg windows`
+    default-column-width {}
+    // If it's forced into a weird layout, you might need to make it float:
+    // command-to-float
+}
+
+window-rule {
+    match app-id=r#"Minecraft Beta 1.7.3$"# // or find app-id via `niri msg windows`
+    open-maximized true
+    open-maximized-to-edges true
+    // If it's forced into a weird layout, you might need to make it float:
+    // command-to-float
+}
+
+
 /*window-rule {
     match on-output="HDMI-A-1"
     open-maximized true
@@ -177,14 +194,14 @@ window-rule {
     draw-border-with-background false
     geometry-corner-radius 8
     clip-to-geometry true
-    //open-on-workspace "1"
+    open-on-output "DP-1"
     open-maximized true
     open-maximized-to-edges true
     opacity 1.0
 }
 
 window-rule {
-    match app-id=r#"electron$"#
+    match app-id=r#"equibop$"#
     draw-border-with-background false
     geometry-corner-radius 8
     clip-to-geometry true
@@ -237,7 +254,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
-    Mod+D hotkey-overlay-title="Run an Application: " { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    Mod+D hotkey-overlay-title="Run an Application: " { spawn-sh "noctalia-shell ipc call launcher toggle"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: lockscreen" { spawn-sh "noctalia-shell ipc call lockScreen lock";}
     Mod+W {spawn "firefox";}
     Mod+E {spawn "thunar";}
@@ -248,6 +265,7 @@ binds {
     XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
     XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
     Mod+M     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+   // Mod+Shift+M { spawn "bash" "-c" "~/.config/niri/toggle-mute-focused.sh"; }
     Mod+B { spawn-sh "wpctl set-default $(pw-cli info 'alsa_output.usb-Synaptics_Hi-Res_Audio_000000000000000000000000-00.analog-stereo' | grep 'id:' | awk '{print $2}')"; }
     Mod+N { spawn-sh "wpctl set-default $(pw-cli info 'alsa_output.usb-Burr-Brown_from_TI_USB_Audio_CODEC-00.analog-stereo-output' | grep 'id:' | awk '{print $2}')"; }
     XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
@@ -381,15 +399,16 @@ binds {
     // Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
 
-    Ctrl+Print { screenshot; }
-    Print { screenshot-screen; }
-    Alt+Print { screenshot-window; }
+    Ctrl+Print { screenshot show-pointer=false; }
+    Print { screenshot-screen show-pointer=false; }
+    Alt+Print { screenshot-window show-pointer=false; }
 
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
     Mod+Shift+E { spawn-sh "noctalia-shell ipc call sessionMenu toggle"; }
     Ctrl+Alt+Delete { quit; }
-
+    
+  //  Mod+Shift+C { spawn-sh "niri msg pick-color"; }
     Mod+Shift+P { power-off-monitors; }
 }
 
