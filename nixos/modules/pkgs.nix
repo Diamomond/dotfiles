@@ -1,11 +1,14 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs,lib, ... }:
 
 {
-
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnsupportedSystem = true;
+  nixpkgs.config.allowUnfree = true; 
 
   environment.systemPackages = with pkgs; [
- wget
+  
+  #system packages
+  wget
+ jq
  git
  fastfetch
  alacritty
@@ -19,47 +22,67 @@
  xdg-user-dirs
  rose-pine-cursor
  adw-gtk3
+ gtk3
  adwaita-icon-theme
  gsettings-desktop-schemas
  glib
  file-roller
  nwg-look
- gedit
- vscode
  btop
- pkgs.davinci-resolve
  ncdu
- #calibre
- qbittorrent
  p7zip
- ani-cli
  ntfs3g
- mpv
- ffmpeg
  wtype
  filezilla
  protontricks
- equibop
- discord
- audacity
- #cloudflare-warp
- mpvpaper
- gpu-screen-recorder
+ ffmpeg
  nvtopPackages.amd
- kdePackages.qttools
- nicotine-plus
- strawberry
  yt-dlp
  proton-vpn
  gparted
+ easyeffects
+ wine
+ pywalfox-native
+ nautilus
+ gnome-keyring
+ gsettings-desktop-schemas
+ inputs.noctalia.packages.${stdenv.hostPlatform.system}.default
+ #cloudflare-warp
+ #kdePackages.qttools
+  
+  #university/productivity
+ obsidian
+ handy
+ stirling-pdf-desktop
+ collabora-desktop
+ zotero
+ gedit
+ vscode
+ foliate
+ zathura
+ lmstudio 
+ 
+ #media stuff
+ calibre
+ qbittorrent
+ pkgs.davinci-resolve
+ ani-cli
+ mpv
+ mpvScripts.convert
+ equibop
+ discord
+ audacity
+ mpvpaper
+ gpu-screen-recorder
+ nicotine-plus
+ strawberry
  makemkv
  asunder
  mangayomi
- easyeffects
- foliate
- zathura
- pywalfox-native
- inputs.noctalia.packages.${stdenv.hostPlatform.system}.default 
-  ]; 
+ sly
+ handbrake
+ krita
+
+  ];
 
 }
