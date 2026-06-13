@@ -11,7 +11,8 @@
   	enable=true;
   };
 
-
+  hardware.bluetooth.enable=true;
+  hardware.bluetooth.powerOnBoot = true;
   hardware.graphics={
 	enable=true;
 	enable32Bit=true;
@@ -24,10 +25,19 @@
 
   environment.systemPackages = with pkgs; [
  protonup-qt
- lutris
- prismlauncher
+ #bottles
+ (heroic.override {
+  extraPkgs = pkgs': with pkgs'; [
+    gamescope
+    gamemode
+  ];
+})
+ (prismlauncher.override{ additionalLibs=[libvlc];})
  azahar
  pcsx2
+ ryubing
+ xivlauncher
+ osu-lazer-bin
  inputs.hytale-launcher.packages.${stdenv.hostPlatform.system}.default
   ];
 
